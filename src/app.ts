@@ -3,6 +3,7 @@ import errorhandler from 'errorhandler';
 import express from 'express';
 import helmet from 'helmet';
 
+import * as config from './config.json';
 import { connectToDB } from './helpers/connectToDB';
 import menuRouter from './routers/menu';
 
@@ -26,7 +27,7 @@ if (process.env.NODE_ENV === 'development') {
 connectToDB()
     .then(() => {
       console.log('Connected to the DB');
-      app.listen(3000);
+      app.listen(config.appPort);
     })
     .catch((err) => {
       console.error(err);
