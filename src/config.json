@@ -1,0 +1,8 @@
+{
+  "appPort": 3000,
+  "database": {
+    "url": "mongodb://<dbuser>:<dbpassword>@<dbhost>:<dbport>/<database>",
+    "user": "user",
+    "password": "password"
+  }
+}
