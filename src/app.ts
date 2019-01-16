@@ -4,7 +4,9 @@ import express from 'express';
 import helmet from 'helmet';
 
 import * as config from './config.json';
+import { handleAxiosErrors } from './helpers/axiosErrorHandler';
 import { connectToDB } from './helpers/connectToDB';
+import { handleCustomErrors } from './helpers/customErrorHandlers';
 import menuRouter from './routers/menu';
 
 const app = express();
@@ -17,11 +19,9 @@ app.use(helmet());
 /** Routers */
 app.use('/menu', menuRouter);
 
-/** Error handling */
-if (process.env.NODE_ENV === 'development') {
-  // only use in development
-  app.use(errorhandler());
-}
+app.use(handleCustomErrors);
+app.use(handleAxiosErrors);
+
 
 /** DB connection */
 connectToDB()
