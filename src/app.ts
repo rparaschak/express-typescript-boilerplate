@@ -1,9 +1,8 @@
 import bodyParser from 'body-parser';
-import errorhandler from 'errorhandler';
 import express from 'express';
 import helmet from 'helmet';
 
-import * as config from './config.json';
+import config from './config.json';
 import { handleAxiosErrors } from './helpers/axiosErrorHandler';
 import { connectToDB } from './helpers/connectToDB';
 import { handleCustomErrors } from './helpers/customErrorHandlers';
@@ -21,7 +20,6 @@ app.use('/menu', menuRouter);
 
 app.use(handleCustomErrors);
 app.use(handleAxiosErrors);
-
 
 /** DB connection */
 connectToDB()
