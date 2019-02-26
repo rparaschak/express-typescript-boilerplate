@@ -3,7 +3,6 @@ import express from 'express';
 import helmet from 'helmet';
 
 import config from './config.json';
-import { handleAxiosErrors } from './helpers/axiosErrorHandler';
 import { connectToDB } from './helpers/connectToDB';
 import { handleCustomErrors } from './helpers/customErrorHandlers';
 import menuRouter from './routers/menu';
@@ -19,7 +18,6 @@ app.use(helmet());
 app.use('/menu', menuRouter);
 
 app.use(handleCustomErrors);
-app.use(handleAxiosErrors);
 
 /** DB connection */
 connectToDB()
