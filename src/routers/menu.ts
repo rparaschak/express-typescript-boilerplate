@@ -12,7 +12,7 @@ router.use((req, res, next) => {
 });
 
 /** Menu routes */
-router.get('/:menuId', asyncMiddleware(menuController.getMenu));
+router.post('/:menuId', asyncMiddleware(menuController.getMenu));
 router.post('/', asyncMiddleware(menuController.createMenu));
 router.put('/:menuId', asyncMiddleware(menuController.editMenu));
 router.delete('/:menuId', asyncMiddleware(menuController.deleteMenu));

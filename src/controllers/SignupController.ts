@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { SignupRequestParams } from '../models/SignupRequestParams';
 import UserSchema from '../schemas/User';
 import { CustomError } from '../models/CustomErrors';
-import { SignupService } from '../services/SignupService';
+import { PasswordService } from '../services/PasswordService';
 
 export class SignupController {
   public async createUserByEmail(req: Request, res: Response) {
@@ -14,7 +14,7 @@ export class SignupController {
       throw new CustomError(409, 'User with such email already exists.');
     }
 
-    const passHash = SignupService.passToHash(signupParams.password);
+    const passHash = PasswordService.passToHash(signupParams.password);
 
     const newUser = new UserSchema({
       email: signupParams.email,
@@ -23,5 +23,7 @@ export class SignupController {
     });
 
     await newUser.save();
+
+    res.status(201).send();
   }
 }
