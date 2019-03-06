@@ -13,8 +13,11 @@ export class SignupController {
     if (user) {
       throw new CustomError(409, 'User with such email already exists.');
     }
-
-    const passHash = PasswordService.passToHash(signupParams.password);
+    console.log(req.body);
+    if (!signupParams.email || !signupParams.password) {
+      throw new CustomError(400, 'Email and Password required.');
+    }
+    const passHash = await PasswordService.passToHash(signupParams.password);
 
     const newUser = new UserSchema({
       email: signupParams.email,

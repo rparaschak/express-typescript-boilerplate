@@ -15,7 +15,10 @@ export class LoginController {
       throw new CustomError(403, 'Wrong credentials.');
     }
 
-    const passwordMatch = PasswordService.compareHashWithPass(user.passwordHash, loginParams.password);
-
+    const passwordMatch = await PasswordService.compareHashWithPass(user.passwordHash, loginParams.password);
+    if (!passwordMatch) {
+      return res.status(403).send('Wrong credentials');
+    }
+    res.status(200).send('yay!');
   }
 }

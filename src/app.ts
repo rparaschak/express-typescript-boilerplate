@@ -5,7 +5,10 @@ import helmet from 'helmet';
 import config from './config.json';
 import { connectToDB } from './helpers/connectToDB';
 import { handleCustomErrors } from './helpers/customErrorHandlers';
+import { handleGlobalErrors } from './helpers/globalErrorHandlers';
 import menuRouter from './routers/menu';
+import signupRouter from './routers/signup';
+import loginRouter from './routers/login';
 
 const app = express();
 
@@ -16,8 +19,11 @@ app.use(helmet());
 
 /** Routers */
 app.use('/menu', menuRouter);
+app.use('/signup', signupRouter);
+app.use('/login', loginRouter);
 
 app.use(handleCustomErrors);
+app.use(handleGlobalErrors);
 
 /** DB connection */
 connectToDB()

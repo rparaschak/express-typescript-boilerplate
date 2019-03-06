@@ -7,6 +7,6 @@ const router = Router();
 const signupController = new SignupController();
 
 /** Menu routes */
-router.post('/signup', asyncMiddleware(signupController.createUserByEmail));
+router.post('/email', asyncMiddleware(signupController.createUserByEmail));
 
 export default router;
