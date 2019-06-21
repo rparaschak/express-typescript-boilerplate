@@ -5,6 +5,8 @@ import { Request, Response } from 'express';
 
 import { CreateMenuRequestParams } from '../models/CreateMenuRequestParams';
 import MenuSchema from '../schemas/Menu';
+import { checkPolicies } from '../utils/checkPolicies';
+import { isAuthenticated } from '../policies/isAuthentificated';
 
 export class MenuController {
   public async getMenu(req: Request, res: Response) {
@@ -15,6 +17,7 @@ export class MenuController {
     res.status(200).json(menu);
   }
 
+  @checkPolicies([isAuthenticated])
   public async createMenu(req: Request, res: Response) {
     const menuQueryParams = new CreateMenuRequestParams(req.body);
     const menu = new MenuSchema(menuQueryParams);
